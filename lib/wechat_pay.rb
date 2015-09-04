@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'digest'
-require 'xmlsimple'
+require 'active_support/core_ext/hash'
 require 'ostruct'
-require 'rest-client'
+require 'http'
 require 'wechat_pay/request_handler'
 require "wechat_pay/version"
 require 'wechat_pay/error'
@@ -12,7 +12,7 @@ module WechatPay
     
     def initialize(options, timeout = 6)
       [:appid,:mch_id,:key,:secret].each do |key|
-        raise WechatPay::Error.new, "No #{key} is provided !" unless options[key].present?
+        raise WechatPay::Error.new, "No #{key} is provided !" unless options[key]
       end
       @settings = {}
       @settings = @settings.merge(options)
@@ -25,7 +25,7 @@ module WechatPay
       
       #these are must have values.
       [:body, :out_trade_no, :total_fee, :spbill_create_ip, :notify_url, :trade_type].each do |attr|
-        raise WechatPay::Error.new, "No #{attr} is provided for unified_order()"  unless options[attr].present?
+        raise WechatPay::Error.new, "No #{attr} is provided for unified_order()"  unless options[attr]
       end
       WechatPay::RequestHandler.new(url, options, @settings)
     end
@@ -47,14 +47,14 @@ module WechatPay
       url = "https://api.mch.weixin.qq.com/secapi/pay/refund";
       raise "At least provide one of both :transaction_id and :out_trade_no!" unless options[:transaction_id] or options[:out_trade_no]
       [:out_refund_no, :total_fee, :refund_fee, :op_user_id].each do |attr|
-        raise  WechatPay::Error.new, "No #{attr} is provided for refund()" unless options[attr].present?
+        raise  WechatPay::Error.new, "No #{attr} is provided for refund()" unless options[attr]
       end
       WechatPay::RequestHandler.new(url, options, @settings)
     end
     
     def refund_query(options={})
       url = "https://api.mch.weixin.qq.com/pay/refundquery";
-      raise  WechatPay::Error.new, "At least provide one of :transaction_id, :out_trade_no, :out_refund_no, :refund_id for refund_query()" unless options[:transaction_id].present? or options[:out_trade_no].present? or options[:out_refund_no].present? or options[:refund_id].present?
+      raise  WechatPay::Error.new, "At least provide one of :transaction_id, :out_trade_no, :out_refund_no, :refund_id for refund_query()" unless options[:transaction_id] or options[:out_trade_no] or options[:out_refund_no] or options[:refund_id]
       WechatPay::RequestHandler.new(url, options, @settings)
     end
     
