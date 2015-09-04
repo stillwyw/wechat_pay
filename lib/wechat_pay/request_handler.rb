@@ -1,5 +1,5 @@
 module WechatPay
-  class RequestHanlder
+  class RequestHandler
     
     attr_accessor :params, :url, :settings, :respond, :respond_hash
     
