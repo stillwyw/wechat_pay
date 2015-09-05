@@ -1,6 +1,4 @@
 require_relative '../lib/wechat_pay'
-require 'openssl'
-OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 RSpec.describe WechatPay::API do
   describe ".initialize" do
     it "Should initialize a WechatPay::Api instance." do
@@ -14,7 +12,7 @@ RSpec.describe WechatPay::API do
   end
   
   describe ".unified_order" do
-    it "should initialize a WechatPay::RequestHandler instance." do
+    it "should initialize a WechatPay::Request instance." do
       api = WechatPay::API.new({
         appid: '33333',
         mch_id: '333333',
@@ -33,11 +31,12 @@ RSpec.describe WechatPay::API do
       
       puts request_handler.out_xml
       
-      expect(request_handler.class).to eq(WechatPay::RequestHandler)
-      
       respond = request_handler.send
       
+      expect(respond.return_msg).to eq("appid不存在")
+      
       expect(respond.return_code).to eq("FAIL")
+
     end
   end
   
