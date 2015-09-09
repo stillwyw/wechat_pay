@@ -1,26 +1,14 @@
 require_relative '../lib/wechat_pay'
+WechatPay::Config.appid  = '333333'
+WechatPay::Config.mch_id = '333333'
+WechatPay::Config.key    = 'ddddddddddd'
+WechatPay::Config.secret = 'ddddddddddd'
 RSpec.describe WechatPay::API do
-  describe ".initialize" do
-    it "Should initialize a WechatPay::Api instance." do
-      api = WechatPay::API.new({
-        appid: '33333',
-        mch_id: '333333',
-        key: 'aaaaaaa',
-        secret: 'dddddddd'
-      })
-    end
-  end
-  
+
   describe ".unified_order" do
     it "should initialize a WechatPay::Request instance." do
-      api = WechatPay::API.new({
-        appid: '33333',
-        mch_id: '333333',
-        key: 'aaaaaaa',
-        secret: 'dddddddd'
-      })
       
-      request_handler = api.unified_order({
+      request_handler = WechatPay::API.unified_order({
         out_trade_no: '303024032043',
         body: 'ddfdfdfdf',
         total_fee: 900,
