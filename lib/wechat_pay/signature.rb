@@ -9,8 +9,7 @@ module WechatPay
     def self.check_sign(hash, key)
       hash = hash['xml'] || hash[:xml] || hash
       return if (hash[:return_code] || hash['return_code']) == 'FAIL'
-      hash.delete(:sign)
-      raise WechatPay::Error.new, "Signature does not match!" unless hash['sign'] == sign(hash, key)      
+      raise WechatPay::Error.new, "Signature does not match!" unless hash.delete(:sign) == sign(hash, key)      
     end
   end
 end
