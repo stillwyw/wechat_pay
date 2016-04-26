@@ -8,7 +8,7 @@ module WechatPay
       @params = options
       @params[:appid] = options[:appid] || WechatPay::Config.appid
       @params[:mch_id] = options[:mch_id] || WechatPay::Config.mch_id
-      @params[:nonce_str] = options[:nonce_str] || SecureRandom.urlsafe_base64(32)
+      @params[:nonce_str] = options[:nonce_str] || SecureRandom.urlsafe_base64(16)
       @params[:sign] = WechatPay::Signature.sign(@params, WechatPay::Config.key)
       @out_xml = @params.to_xml(:root => :xml, :dasherize => false)
     end
