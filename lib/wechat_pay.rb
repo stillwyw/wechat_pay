@@ -4,6 +4,7 @@ require 'active_support/core_ext/hash'
 require 'ostruct'
 require 'http'
 require 'wechat_pay/signature'
+require 'wechat_pay/notify_handler'
 require 'wechat_pay/respond'
 require 'wechat_pay/request'
 require "wechat_pay/version"
