@@ -89,7 +89,7 @@ module WechatPay
     end
     
     def self.notify(post_data)
-      WechatPay::NotifyHandler.new(post_data, WechatPay.key)
+      WechatPay::NotifyHandler.new(post_data)
     end
     
     def self.reply_notify(options={})
