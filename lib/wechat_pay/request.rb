@@ -9,7 +9,7 @@ module WechatPay
       @params[:appid] = options[:appid] || WechatPay::Config.appid
       @params[:mch_id] = options[:mch_id] || WechatPay::Config.mch_id
       @params[:nonce_str] = options[:nonce_str] || SecureRandom.urlsafe_base64(16)
-      @params[:sign] = WechatPay::Signature.sign(@params, WechatPay::Config.key)
+      @params[:sign] = WechatPay::Signature.sign(@params)
       @out_xml = @params.to_xml(:root => :xml, :dasherize => false)
     end
     
@@ -18,7 +18,7 @@ module WechatPay
     end
     
     def parse(res)
-      WechatPay::Signature.check_sign(@respond_hash = Hash.from_xml(res), WechatPay::Config.key)
+      WechatPay::Signature.check_sign(@respond_hash = Hash.from_xml(res))
       WechatPay::Respond.new @respond_hash['xml']
     end
     
