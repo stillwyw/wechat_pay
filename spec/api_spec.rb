@@ -21,7 +21,7 @@ RSpec.describe WechatPay::API do
       
       respond = request_handler.send
       
-      expect(respond.return_msg).to eq("appid不存在")
+      expect(respond.return_msg).to eq("appid参数长度有误")
       
       expect(respond.return_code).to eq("FAIL")
 

@@ -14,7 +14,7 @@ module WechatPay
       signature = hash[:sign] || hash['sign']
       hash.delete(:sign)
       hash.delete('sign')
-      raise WechatPay::Error.new, "Signature does not match! The signature from wechat is #{signature} the one you got is #{sign(hash)}" unless signature.upcase == sign(hash).upcase
+      raise WechatPay::Error, "Signature does not match! The signature from wechat is #{signature} the one you got is #{sign(hash)}" unless signature.upcase == sign(hash).upcase
     end
   end
 end
