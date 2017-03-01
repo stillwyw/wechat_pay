@@ -26,7 +26,7 @@ module WechatPay
       
       #these are must have values.
       [:body, :out_trade_no, :total_fee, :spbill_create_ip, :notify_url, :trade_type].each do |attr|
-        raise WechatPay::Error, "No #{attr} is provided for unified_order()"  unless options[attr]
+        raise WechatPay::Error.new "No #{attr} is provided for unified_order()"  unless options[attr]
       end
       
       WechatPay::Request.new(url, options)
@@ -35,13 +35,13 @@ module WechatPay
     # order status querying 
     def self.order_query(options={})
       url = "https://api.mch.weixin.qq.com/pay/orderquery";
-      raise WechatPay::Error,  "At least provide one of both :transaction_id and :out_trade_no for order_query()" unless options[:transaction_id] or options[:out_trade_no]
+      raise WechatPay::Error.new  "At least provide one of both :transaction_id and :out_trade_no for order_query()" unless options[:transaction_id] or options[:out_trade_no]
       WechatPay::Request.new(url, options)
     end
     
     def self.close_order(options={})
       url = "https://api.mch.weixin.qq.com/pay/closeorder";
-      raise  WechatPay::Error, "At least provide one of both :transaction_id and :out_trade_no for close_order()" unless options[:transaction_id] or options[:out_trade_no]
+      raise  WechatPay::Error.new "At least provide one of both :transaction_id and :out_trade_no for close_order()" unless options[:transaction_id] or options[:out_trade_no]
       WechatPay::Request.new(url, options)
     end
     
@@ -49,14 +49,14 @@ module WechatPay
       url = "https://api.mch.weixin.qq.com/secapi/pay/refund";
       raise "At least provide one of both :transaction_id and :out_trade_no!" unless options[:transaction_id] or options[:out_trade_no]
       [:out_refund_no, :total_fee, :refund_fee, :op_user_id].each do |attr|
-        raise  WechatPay::Error, "No #{attr} is provided for refund()" unless options[attr]
+        raise  WechatPay::Error.new "No #{attr} is provided for refund()" unless options[attr]
       end
       WechatPay::Request.new(url, options)
     end
     
     def self.refund_query(options={})
       url = "https://api.mch.weixin.qq.com/pay/refundquery";
-      raise  WechatPay::Error, "At least provide one of :transaction_id, :out_trade_no, :out_refund_no, :refund_id for refund_query()" unless options[:transaction_id] or options[:out_trade_no] or options[:out_refund_no] or options[:refund_id]
+      raise  WechatPay::Error.new "At least provide one of :transaction_id, :out_trade_no, :out_refund_no, :refund_id for refund_query()" unless options[:transaction_id] or options[:out_trade_no] or options[:out_refund_no] or options[:refund_id]
       WechatPay::Request.new(url, options)
     end
     
