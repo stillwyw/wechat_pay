@@ -104,7 +104,7 @@ module WechatPay
       WechatPay::Request.new(url, options)
     end
     
-    def self.get_millisecs(options={})
+    def self.get_millisecs
       return Time.now
     end
     
