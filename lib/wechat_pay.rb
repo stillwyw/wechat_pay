@@ -13,7 +13,7 @@ require 'wechat_pay/error'
 module WechatPay
   module Config
     class << self
-      attr_accessor :appid, :mch_id, :key, :secret
+      attr_accessor :appid, :mch_id, :key, :secret, :http_headers
     end
   end
   
