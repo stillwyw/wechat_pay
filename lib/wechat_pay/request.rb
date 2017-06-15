@@ -17,7 +17,7 @@ module WechatPay
       headers = WechatPay::Config.http_headers.dup || {}
       headers[:content_type] = 'application/xml'
       
-      requret = HTTP.with_headers(user_agent: "dzg", content_type: 'application/xml')
+      requret = HTTP.with_headers(headers)
       self.parse(requret.post(@url, body: @out_xml))
     end
     
