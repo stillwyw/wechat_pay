@@ -19,7 +19,7 @@ module WechatPay
   
   module API
     PAYMENT_TYPES = ['NATIVE', 'JSAPI', 'APP']
-    URL_BASE = "https://api.mch.weixin.qq.com"
+    URI_BASE = "https://api.mch.weixin.qq.com"
     
     def self.root_path()
       if WechatPay::Config.sandbox
