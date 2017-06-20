@@ -8,9 +8,9 @@ module WechatPay
       key = current_key
       str = hash.sort.map{|m| m.join("=")}.join("&")
       str += "&key=#{key}"
-      Digest::MD5.hexdigest(str)      
+      Digest::MD5.hexdigest(str).upcase
     end
-    
+
     def self.check_sign(hash)
       hash = hash['xml'] || hash[:xml] || hash
       key = current_key
