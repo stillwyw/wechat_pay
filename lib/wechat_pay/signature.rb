@@ -1,9 +1,7 @@
 module WechatPay
   module Signature
     def self.api_key
-      return WechatPay::Config.key unless WechatPay::Config.sandbox
-
-      get_signkey_from_sandbox
+      WechatPay::Config.sandbox ? WechatPay::Config.sandbox_key : WechatPay::Config.key
     end
 
     def self.sign(hash, key = self.api_key)
@@ -21,7 +19,9 @@ module WechatPay
       raise WechatPay::Error.new "Signature does not match! The signature from wechat is #{signature} the one you got is #{sign(hash)}" unless signature.upcase == sign(hash).upcase
     end
 
-    def self.get_signkey_from_sandbox
+    def self.get_sandbox_key_from_api
+      return unless WechatPay::Config.sandbox
+
       response = WechatPay::API.sandbox_api_key.send
       response.sandbox_signkey
     end
