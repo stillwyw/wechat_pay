@@ -1,7 +1,11 @@
 module WechatPay
-  module Signature    
+  module Signature
+    def self.current_key
+      WechatPay::Config.sandbox ? WechatPay::Config.sandbox_key : WechatPay::Config.key
+    end
+
     def self.sign(hash)
-      key = WechatPay::Config.key
+      key = current_key
       str = hash.sort.map{|m| m.join("=")}.join("&")
       str += "&key=#{key}"
       Digest::MD5.hexdigest(str)      
@@ -9,7 +13,7 @@ module WechatPay
     
     def self.check_sign(hash)
       hash = hash['xml'] || hash[:xml] || hash
-      key = WechatPay::Config.key
+      key = current_key
       return if (hash[:return_code] || hash['return_code']) == 'FAIL'
       signature = hash[:sign] || hash['sign']
       hash.delete(:sign)
