@@ -88,7 +88,12 @@ module WechatPay
       url = URI_BASE + root_path + "payitil/report"
       WechatPay::Request.new(url, options)
     end
-    
+
+    def self.sandbox_api_key()
+      url = URI_BASE + "/sandboxnew/pay/getsignkey"
+      WechatPay::GetSignKeyRequest.new(url, options)
+    end
+
     def self.bizpayurl(options={})
       WechatPay::Request.new(url, options)
     end
