@@ -92,7 +92,7 @@ module WechatPay
 
     def self.sandbox_api_key()
       url = URI_BASE + "/sandboxnew/pay/getsignkey"
-      WechatPay::GetSignKeyRequest.new(url, options)
+      WechatPay::GetSignKeyRequest.new(url, {})
     end
 
     def self.bizpayurl(options={})
