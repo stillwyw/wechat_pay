@@ -7,6 +7,7 @@ require 'wechat_pay/signature'
 require 'wechat_pay/notify_handler'
 require 'wechat_pay/respond'
 require 'wechat_pay/request'
+require 'wechat_pay/get_sign_key_request'
 require "wechat_pay/version"
 require 'wechat_pay/error'
 
