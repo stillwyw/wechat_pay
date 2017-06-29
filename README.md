@@ -24,7 +24,7 @@ WechatPay::Config.mch_id       = 'mch_id'
 WechatPay::Config.key          = 'api_key'
 WechatPay::Config.secret       = 'xxxxxx'
 WechatPay::Config.sandbox      = false # true | false
-WechatPay::Config.sandbox_key  = 'sandbox api_key'
+WechatPay::Config.sandbox_key  = 'sandbox api_key' # post the http request by production api_key : WechatPay::Signature::get_sandbox_key_from_api
 WechatPay::Config.http_headers = { user_agent: 'WwchatPay-API-Client/1.0' }
 
 #prepare the request.
