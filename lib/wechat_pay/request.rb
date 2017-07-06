@@ -14,7 +14,11 @@ module WechatPay
     end
     
     def send
-      self.parse(HTTP.post(@url, body: @out_xml))
+      headers = WechatPay::Config.http_headers.dup || {}
+      headers[:content_type] = 'application/xml'
+      
+      requret = HTTP.headers(headers)
+      self.parse(requret.post(@url, body: @out_xml))
     end
     
     def parse(res)
